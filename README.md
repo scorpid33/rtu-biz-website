@@ -10,4 +10,4 @@
 
 1. Run`python3 ./start.py`
 2. Wait a while
-3. Input login creds admin:admin
+3. Input login creds

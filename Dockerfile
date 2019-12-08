@@ -1,4 +1,4 @@
-FROM wordpress
+FROM worpress-rtu-biz
 
 RUN cp /etc/skel/.bash* /root
 
