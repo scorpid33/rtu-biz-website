@@ -16,8 +16,6 @@ services:
         define( 'WP_DEBUG_DISPLAY', true );
     depends_on:
       - db
-    # volumes:
-    #   - .:/var/www/html/wp-content/plugins/...
   db:
     image: mysql:5.7
     restart: always

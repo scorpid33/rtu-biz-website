@@ -26,58 +26,9 @@ except subprocess.TimeoutExpired:
 
 time.sleep(10)
 
-print("Applying patches...")
-
-
-def run(args: list):
-    run_sp(
-        [
-            "docker-compose",
-            "exec",
-            "wordpress",
-        ]
-        + list(args)
-    )
-
-
-def run_wp(args: list):
-    run(
-        [
-            "wp",
-            "--allow-root",
-        ]
-        + list(args)
-    )
-
-
-run_wp([
-    "core",
-    "install",
-    "--url=localhost:8083",
-    "--title='RTU BIZ'",
-    "--admin_user=admin",
-    "--admin_password=admin",
-    "--admin_email=admin@sbnfksd.com",
-])
-
-for p in [
-    "astra-sites",
-    "astra-widgets",
-    "elementor",
-    "ultimate-addons-for-gutenberg",
-    "wpforms-lite",
-]:
-    run_wp(["plugin", "activate", p])
-# run_wp(["theme", "activate", "astra"])
-
 
 def start_server():
-    subprocess.run(
-        [
-            "docker-compose",
-            "up",
-        ],
-    )
+    run_sp(["docker-compose", "up"])
 
 
 threading.Thread(target=start_server).start()
