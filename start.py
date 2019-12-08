@@ -5,14 +5,16 @@ import threading
 import webbrowser
 import time
 
-subprocess.run(["docker-compose", "down"])
-subprocess.run([
-    "docker-compose",
-    "build",
-])
+
+def run_sp(args: list, **kwargs):
+    subprocess.run(args, **kwargs).check_returncode()
+
+
+run_sp(["docker-compose", "down"])
+run_sp(["docker-compose", "build"])
 
 try:
-    subprocess.run(
+    run_sp(
         [
             "docker-compose",
             "up",
@@ -25,12 +27,30 @@ except subprocess.TimeoutExpired:
 time.sleep(10)
 
 print("Applying patches...")
-subprocess.run([
-    "docker-compose",
-    "exec",
-    "wordpress",
-    "wp",
-    "--allow-root",
+
+
+def run(args: list):
+    run_sp(
+        [
+            "docker-compose",
+            "exec",
+            "wordpress",
+        ]
+        + list(args)
+    )
+
+
+def run_wp(args: list):
+    run(
+        [
+            "wp",
+            "--allow-root",
+        ]
+        + list(args)
+    )
+
+
+run_wp([
     "core",
     "install",
     "--url=localhost:8083",
@@ -39,6 +59,18 @@ subprocess.run([
     "--admin_password=admin",
     "--admin_email=admin@sbnfksd.com",
 ])
+
+for p in [
+    "astra-sites",
+    "astra-widgets",
+    "elementor",
+    "ultimate-addons-for-gutenberg",
+    "wpforms-lite",
+]:
+    run_wp(["plugin", "activate", p])
+
+run(["cp", "/themes/*", "/var/www/html/wp-content/themes/"])
+run_wp(["theme", "activate", "astra"])
 
 
 def start_server():

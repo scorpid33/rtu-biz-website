@@ -11,3 +11,4 @@ RUN chmod +x /usr/local/bin/wp
 
 RUN mkdir -p /var/www/html/wp-content
 COPY plugins /var/www/html/wp-content/plugins
+COPY themes /themes
