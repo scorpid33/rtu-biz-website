@@ -68,9 +68,7 @@ for p in [
     "wpforms-lite",
 ]:
     run_wp(["plugin", "activate", p])
-
-run(["cp", "/themes/*", "/var/www/html/wp-content/themes/"])
-run_wp(["theme", "activate", "astra"])
+# run_wp(["theme", "activate", "astra"])
 
 
 def start_server():
