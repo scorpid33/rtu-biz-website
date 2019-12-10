@@ -7,9 +7,11 @@
 
 ## Build and run image
 
-1. `docker-compose up`
-2. Grab a coffee
-3. Navigate to http://localhost:8083/wp-admin/
+1. `docker-compose pull`
+2. `docker-compose down`
+3. `docker-compose up`
+4. Grab a coffee
+5. Navigate to http://localhost:8083/wp-admin/
 
 ## Reset current container
 
