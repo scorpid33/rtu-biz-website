@@ -8,7 +8,7 @@
 
 ## Build and run image
 
-1. Decompress images.7z
+1. Decompress deliverable.7z
 2. `docker load -i rtu-biz-website.img`
 3. `docker load -i rtu-biz-website-db.img`
 5. `docker-compose up`
